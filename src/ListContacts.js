@@ -6,10 +6,13 @@ import React, { Component } from 'react'
 class ListContacts extends Component {
     //Render method describes the UI of our component
     render() {
-        console.log('Props', this.props)
         return (
             <ol className='contact-list'>
-            
+                {this.props.contacts.map((contact) => ( 
+                    <li key={contact.id}> {/* Need to add key or else it will show error */}
+                        {contact.name} {/* This displays all the names from the array in App.js */}
+                    </li>
+                ))}
             </ol>
         )
     }
