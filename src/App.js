@@ -32,7 +32,7 @@ class App extends Component {
           Anything in between this div will show on the browser.
           We are showing component ListContacts with contacts above. 
         */}
-        <ListContacts contacts={contacts} />
+        <ListContacts contacts={contacts} /> {/* the contacts inside the bracket is the prop */}
       </div>
     );
   }
