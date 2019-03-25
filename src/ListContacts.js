@@ -18,23 +18,40 @@ class ListContacts extends Component
             query: query.trim() //This is where query gets reset from users values
         }))
     }
+    clearQuery = () => {
+        this.updateQuery('') //This sets blank to the state property and resets the input fill
+    }
 
     render() 
     {
+        const { query } = this.state
+        const { contacts, onDeleteContact } = this.props
+
+        const showingContacts = query === ''
+            ? contacts
+            : contacts.filter((c) => (
+                c.name.toLowerCase().includes(query.toLowerCase())
+            ))
+
         return(
             <div className='list-contacts'>
-                {JSON.stringify(this.state)} {/* This is the string beneath the search input */} 
                 <div className='list-contacts-top'>
                     <input
                         className='search-contacts' //I assume this is from a pre-built CSS
                         type='text' //Type of value going into this search box
                         placeholder='Search Contacts' //Place holder when no one types anything in the search box
-                        value={this.state.query} //The value is being updated onChange and is changing the state in updateQuery
+                        value={query} //The value is being updated onChange and is changing the state in updateQuery
                         onChange={(event) => this.updateQuery(event.target.value)} //This event happens when user starts typing in the search field then "event.target.value" will capture keystrokes and pass the value to updateQuery
                     />
                 </div>
+                {showingContacts.length !== contacts.length && ( //If showingContacts does not equal contacts '&&' makes sure to do this if true
+                    <div className='showing-contacts'>
+                        <span>Now Showing {showingContacts.length} of {contacts.length}</span>
+                        <button onClick={this.clearQuery}>Show all</button>
+                    </div>
+                )}
                 <ol className='contact-list'> {/* contact-list is from CSS */}
-                    {this.props.contacts.map((contact) => ( 
+                    {showingContacts.map((contact) => ( 
                         <li key={contact.id} className='contact-list-item'> {/* Need to add key or else it will show error */}
                             <div 
                                 className='contact-avatar' 
@@ -47,7 +64,7 @@ class ListContacts extends Component
                                 <p>{contact.handle}</p>
                             </div>
                             <button 
-                                onClick={() => this.props.onDeleteContact(contact)} //Added onclick function and passing function prop
+                                onClick={() => onDeleteContact(contact)} //Added onclick function and passing function prop
                                 className='contact-remove'>
                                 remove {/* Button to remove contacts. contact-remove is coming from CSS*/}
                             </button>
