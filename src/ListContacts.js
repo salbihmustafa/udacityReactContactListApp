@@ -66,7 +66,7 @@ class ListContacts extends Component
                             ></div>{/* contact-avatar is coming from CSS */}
                             <div className='contact-details'> {/* contact-details is coming from CSS */}
                                 <p>{contact.name}</p>
-                                <p>{contact.handle}</p>
+                                <p>{`@${contact.handle}`}</p>
                             </div>
                             <button 
                                 onClick={() => onDeleteContact(contact)} //Added onclick function and passing function prop
