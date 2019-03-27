@@ -3,6 +3,7 @@
 //This file is going to be responsible for listing all of the contacts.
 import React, { Component} from 'react'
 import PropTypes from 'prop-types' //make sure to run command on cmd "yarn add prop-types"
+import { Link } from 'react-router-dom'
 
 class ListContacts extends Component 
 {
@@ -25,7 +26,7 @@ class ListContacts extends Component
     render() 
     {
         const { query } = this.state
-        const { contacts, onDeleteContact, onNavigate } = this.props
+        const { contacts, onDeleteContact } = this.props
 
         const showingContacts = query === ''
             ? contacts
@@ -43,11 +44,10 @@ class ListContacts extends Component
                         value={query} //The value is being updated onChange and is changing the state in updateQuery
                         onChange={(event) => this.updateQuery(event.target.value)} //This event happens when user starts typing in the search field then "event.target.value" will capture keystrokes and pass the value to updateQuery
                     />
-                    <a
-                        href='#create'
-                        onClick={onNavigate}
+                    <Link
+                        to='/create'
                         className='add-contact'
-                    >Add Contact</a>
+                    >Add Contact</Link>
                 </div>
                 {showingContacts.length !== contacts.length && ( //If showingContacts does not equal contacts '&&' makes sure to do this if true
                     <div className='showing-contacts'>
