@@ -25,7 +25,7 @@ class ListContacts extends Component
     render() 
     {
         const { query } = this.state
-        const { contacts, onDeleteContact } = this.props
+        const { contacts, onDeleteContact, onNavigate } = this.props
 
         const showingContacts = query === ''
             ? contacts
@@ -43,6 +43,11 @@ class ListContacts extends Component
                         value={query} //The value is being updated onChange and is changing the state in updateQuery
                         onChange={(event) => this.updateQuery(event.target.value)} //This event happens when user starts typing in the search field then "event.target.value" will capture keystrokes and pass the value to updateQuery
                     />
+                    <a
+                        href='#create'
+                        onClick={onNavigate}
+                        className='add-contact'
+                    >Add Contact</a>
                 </div>
                 {showingContacts.length !== contacts.length && ( //If showingContacts does not equal contacts '&&' makes sure to do this if true
                     <div className='showing-contacts'>
@@ -78,10 +83,10 @@ class ListContacts extends Component
 
 //These are assigned Prop types
 //.array is an array type. .func is a function type.
-ListContacts.PropTypes = {
+/*ListContacts.PropTypes = {
     contacts: PropTypes.array.isRequired,
     onDeleteContact: PropTypes.func.isRequired
-}
+}*/
 
 //Whenever creating a component make sure to default the class
 export default ListContacts
