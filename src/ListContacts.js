@@ -1,9 +1,9 @@
 //I created this file by right clicking src and pressing new file.
 //I am following a video.
 //This file is going to be responsible for listing all of the contacts.
-import React, { Component} from 'react'
-import PropTypes from 'prop-types' //make sure to run command on cmd "yarn add prop-types"
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class ListContacts extends Component 
 {
@@ -80,13 +80,6 @@ class ListContacts extends Component
         )
     }
 }
-
-//These are assigned Prop types
-//.array is an array type. .func is a function type.
-/*ListContacts.PropTypes = {
-    contacts: PropTypes.array.isRequired,
-    onDeleteContact: PropTypes.func.isRequired
-}*/
 
 //Whenever creating a component make sure to default the class
 export default ListContacts
