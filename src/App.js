@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import ListContacts from './ListContacts' //Import our component from ListContacts.js
 import * as ContactsAPI from './utils/ContactsAPI'
 import CreateContact from './CreateContact'
+import { Route } from 'react-router-dom'
 
 class App extends Component {
 
   //Create State property and create contacts object. Copy the array inside the contacts object array
   state = 
   {
-    contacts: [],
-    screen: 'list'
+    contacts: []
   }
 
   //Lifecycle which is an AJAX call
@@ -37,25 +37,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/*
-          This is how you do comments in JSX
-          Anything in between this div will show on the browser.
-          We are showing component ListContacts with contacts above. 
-        */}
-        {this.state.screen === 'list' && (
+        <Route exact path='/' render={() => (
           <ListContacts 
             contacts={this.state.contacts} //This is where contact prop is passed.
             onDeleteContact={this.removeContact} //This is passing a function prop
-            onNavigate={() => {
-              this.setState(() => ({
-                screen: 'create'
-              }))
-            }}
           />
-        )}
-        {this.state.screen === 'create' && (
-          <CreateContact /> 
-        )}
+        )} />
+        <Route path='/create' component={CreateContact} />
       </div>
     );
   }
